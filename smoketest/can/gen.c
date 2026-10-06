@@ -37,7 +37,7 @@
 // Test mode:  1 = internal LOOPBACK (no transceiver / CANable needed)
 //             0 = NORMAL (real bus: SN65HVD230 <-> CANable V2)
 // ---------------------------------------------------------------------------
-#define CAN_LOOPBACK_TEST 1
+#define CAN_LOOPBACK_TEST 0
 
 #define CAN_ID_HEARTBEAT 0x123 // STM32 -> PC, every 500 ms (counter)
 #define CAN_ID_CMD 0x321       // PC -> STM32, toggles LD2
@@ -163,7 +163,6 @@ int main(void) {
   /* USER CODE BEGIN WHILE */
   while (1) {
     /* USER CODE END WHILE */
-
     // 1. Cyclic heartbeat
     if ((HAL_GetTick() - lastTx) >= HEARTBEAT_MS) {
       lastTx += HEARTBEAT_MS;
@@ -252,7 +251,7 @@ static void MX_CAN1_Init(void) {
   /* USER CODE END CAN1_Init 1 */
   hcan1.Instance = CAN1;
   hcan1.Init.Prescaler = 2;
-  hcan1.Init.Mode = CAN_MODE_LOOPBACK;
+  hcan1.Init.Mode = CAN_MODE_NORMAL;
   hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
   hcan1.Init.TimeSeg1 = CAN_BS1_13TQ;
   hcan1.Init.TimeSeg2 = CAN_BS2_2TQ;
