@@ -1,0 +1,13 @@
+[TRIAL 3 RECORDED] Counts = -1451 (Dir: CCW (-))
+=======================================================
+3-5 TRIAL CALIBRATION & ACCEPTANCE SUMMARY
+=======================================================
+Trial 1            : -1451 counts
+Trial 2            : -1376 counts
+Trial 3            : -1451 counts
+Average N_rev       : -1426.0 counts / turn
+Estimated Gear Ratio: 50.92 : 1 (G = N_rev / 28)
+Max Deviation       : 3.50% (Milestone <= 2.0%)
+Direction Sign      : CCW (-, PASS)
+VERDICT             : >>> [FAIL] <<<
+=======================================================
