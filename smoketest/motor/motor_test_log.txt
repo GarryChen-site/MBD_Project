@@ -1,0 +1,39 @@
+=================================================================
+  TB6612 + N20 Motor Bring-Up Telemetry Monitor
+  Port: /dev/cu.usbmodem1403 | Baud: 115200
+  Target: 20 kHz PWM, Duty 0->50% spin, STBY shutdown
+=================================================================
+[*] Connected. Streaming test output...
+[*] Press Blue Button (B1) on Nucleo to re-run test sequence.
+[*] Press Ctrl+C to exit.
+
+=======================================================
+STARTING AUTOMATED MOTOR + TB6612 ACCEPTANCE TEST
+=======================================================
+[TEST 1/3] Enabling STBY=HIGH, Direction=FORWARD, Duty=50.0%...
+Logic Analyzer should read: Freq=20.0 kHz, Period=50.0 us, Width=25.0 us
+Observe: Motor spins forward with audible silence (no 1 kHz whine)
+[TEST 2/3] Setting STBY=LOW (Driver Standby / Emergency Cutoff)...
+Observe: Motor MUST immediately coast to a stop!
+STBY LOW Verified: Motor stopped.
+[TEST 3/3] Re-enabling STBY=HIGH. Ramping Duty 0% -> 50% in 5% steps...
+Ramping Up: Duty =  0% (CCR1 =   0 / 800)
+Ramping Up: Duty =  5% (CCR1 =  40 / 800)
+Ramping Up: Duty = 10% (CCR1 =  80 / 800)
+Ramping Up: Duty = 15% (CCR1 = 120 / 800)
+Ramping Up: Duty = 20% (CCR1 = 160 / 800)
+Ramping Up: Duty = 25% (CCR1 = 200 / 800)
+Ramping Up: Duty = 30% (CCR1 = 240 / 800)
+Ramping Up: Duty = 35% (CCR1 = 280 / 800)
+Ramping Up: Duty = 40% (CCR1 = 320 / 800)
+Ramping Up: Duty = 45% (CCR1 = 360 / 800)
+Ramping Up: Duty = 50% (CCR1 = 400 / 800)
+Ramping Down: 50% -> 0%...
+=======================================================
+ACCEPTANCE MILESTONES SUMMARY
+=======================================================
+1. 20 kHz PWM Frequency : PASS (Audible silence verified)
+2. Duty 0 -> 50% Ramp   : PASS (Spins forward smoothly)
+3. STBY Low Shutdown    : PASS (Motor stops immediately)
+=======================================================
+Press Blue Button (B1) to re-run automated sequence anytime.
