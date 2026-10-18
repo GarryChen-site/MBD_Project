@@ -1,0 +1,19 @@
+--- 3-DISTANCE RULER CALIBRATION (Acceptance: +/- 10%) ---
+>>> [TARGET 1/3] Align ruler target at 100 mm (10 cm),
+then click the Blue Button (B1)... <<<
+Target: 100 mm | Measured:  88 mm | Error: 12.0% -> [FAIL]
+>>> [TARGET 2/3] Align ruler target at 200 mm (20 cm),
+then click the Blue Button (B1)... <<<
+Target: 200 mm | Measured: 198 mm | Error: 1.0% -> [PASS]
+>>> [TARGET 3/3] Align ruler target at 300 mm (30 cm),
+then click the Blue Button (B1)... <<<
+Target: 300 mm | Measured: 292 mm | Error: 2.6% -> [PASS]
+=======================================================
+TOF53200 3-DISTANCE ACCEPTANCE SUMMARY
+=======================================================
+Point 1 (100 mm) : Measured =  88 mm, Error = 12.0% [FAIL]
+Point 2 (200 mm) : Measured = 198 mm, Error = 1.0% [PASS]
+Point 3 (300 mm) : Measured = 292 mm, Error = 2.6% [PASS]
+Acceptance Threshold: Within +/- 10.0% of target distance
+-------------------------------------------------------
+TOF53200 VERDICT : >>> [FAIL] <<<

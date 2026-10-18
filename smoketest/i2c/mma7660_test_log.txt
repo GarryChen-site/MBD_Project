@@ -1,0 +1,13 @@
+=======================================================
+MMA7660FC ACCEPTANCE SUMMARY
+=======================================================
+Gravity Vector Magnitude: PASS (0.75g <= |g| <= 1.25g)
+Tilt / Orientation Status: PASS
+-------------------------------------------------------
+MMA7660FC VERDICT : >>> [PASS] <<<
+=======================================================
+Entering continuous MMA7660 stream (tilt board to observe axes).
+[LIVE MMA7660] X=g Y=g Z=g | |g|=g | Left
+[LIVE MMA7660] X=g Y=g Z=g | |g|=g | Left
+[LIVE MMA7660] X=g Y=g Z=g | |g|=g | Left
+[LIVE MMA7660] X=g Y=g Z=g | |g|=g | Left
