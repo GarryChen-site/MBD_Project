@@ -1,0 +1,46 @@
+=======================================================
+  SG90 SERVO & MOTOR SMOKETEST TELEMETRY MONITOR       
+  Port: /dev/cu.usbmodem1103 | Baud: 115200                   
+=======================================================
+
+
+=======================================================
+  SG90 MICRO SERVO & CONCURRENT MOTOR SMOKETEST SUITE  
+  Signal: TIM3_CH1 (PA6 / D12) @ 50 Hz (20 ms period)  
+=======================================================
+
+[POWER AUDIT] Inspecting RCC Reset Flags...
+              Normal Pin / Software Reset verified.
+              System Uptime: OK (No active brownout).
+
+[STAGE 1/3] Step Motion Acceptance: 0 deg -> 90 deg -> 0 deg
+            Testing hold stability without stalling/buzzing...
+    -> Commanding 0 deg (Pulse: 500 us)...
+    -> Commanding 90 deg Neutral (Pulse: 1500 us)...
+    -> Returning to 0 deg (Pulse: 500 us)...
+    -> Holding at 0 deg for 1 second. Listen for silence...
+    [STAGE 1 VERDICT] 0 -> 90 -> 0 deg Motion: PASS
+
+[STAGE 2/3] Smooth Angular Sweep (0 deg -> 180 deg -> 0 deg)
+            Controlled slew-rate: 10 ms/deg (Eliminates current spikes)...
+    -> Sweeping 0 deg to 180 deg...
+    -> Sweeping 180 deg back to 0 deg...
+    -> Moving to Neutral 90 deg...
+    [STAGE 2 VERDICT] Full 180 deg Sweep & Silent Hold: PASS
+
+[STAGE 3/3] Concurrent DC Motor + Servo Inrush Stress Test
+            Target: Motor + Servo starting together MUST NOT reset MCU!
+            Press Blue Button (B1) to begin Stage 3 stress run...
+    [T+0ms] Starting N20 Motor at 50% Duty (20 kHz on TIM4)...
+    [T+50ms] Actuating SG90 Servo concurrently under active motor load...
+    [T+2415ms] Motor stopped. Stress cycle finished.
+
+=======================================================
+  SG90 + MOTOR SMOKETEST ACCEPTANCE SUMMARY            
+=======================================================
+  1. 0 -> 90 -> 0 deg Transition : PASS [Smooth & Exact]
+  2. Mechanical Anti-Buzz Release: PASS [Silent Neutral]
+  3. Dual Actuator Concurrency   : PASS [Zero MCU Resets]
+-------------------------------------------------------
+  FINAL MILESTONE VERDICT        : >>> [PASS] <<<
+=======================================================
