@@ -1,0 +1,27 @@
+==============================================================================
+  STM32 MBD CANable Live Monitor & Fault Catcher (slcan @ 500000 bit/s)
+  DBC Database : /Users/church/Documents/github/MBD_Project/hardware_loop/can/vehicle.dbc
+  Capture File : /Users/church/Documents/github/MBD_Project/hardware_loop/can/logs/can_fault_capture.csv
+==============================================================================
+[*] Listening for STM32 CAN frames (`0x200`, `0x201`, `0x210`, `0x123`)...
+[*] Push Joystick UP-RIGHT (diagonal) for normal driving, or RIGHT-ONLY to inject F_PEDAL_PLAUS!
+
+[ 12.254s] 0x200 Drive_Status | req= 34.6 rpm  meas=  0.0 rpm  duty=13.5%  mode=NORMAL    cnt=13 (CRC:OK)
+[ 12.293s] 0x200 Drive_Status | req= 30.0 rpm  meas= 29.5 rpm  duty=14.0%  mode=DEGRADED  cnt=15 (CRC:OK)
+[ 12.313s] 0x200 Drive_Status | req= 30.0 rpm  meas= 33.7 rpm  duty=13.0%  mode=DEGRADED  cnt= 0 (CRC:OK)
+[ 12.333s] 0x200 Drive_Status | req= 30.0 rpm  meas= 33.7 rpm  duty=12.5%  mode=DEGRADED  cnt= 1 (CRC:OK)
+[ 12.353s] 0x200 Drive_Status | req= 30.0 rpm  meas= 33.7 rpm  duty=12.0%  mode=DEGRADED  cnt= 2 (CRC:OK)
+[ 12.372s] 0x200 Drive_Status | req= 30.0 rpm  meas= 29.5 rpm  duty=12.5%  mode=DEGRADED  cnt= 3 (CRC:OK)
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  [!!! FAULT CAUGHT ON CAN BUS @ 12.382s !!!] 0x201 Diag_Status: fault_bitmap=0x0002 (F_PEDAL_RANGE)
+  --> Sending UDS 0x22 ReadDataByIdentifier (0x7E0) for Active Faults & WCET...
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  [<-- UDS 0x7E8 Resp] DID 0xF100 (Active Faults) = 0x0002 (F_PEDAL_RANGE)
+  [<-- UDS 0x7E8 Resp] DID 0xF102 (Max Step WCET) = 75 us
+
+[ 12.392s] 0x200 Drive_Status | req= 30.0 rpm  meas= 33.7 rpm  duty=11.5%  mode=DEGRADED  cnt= 4 (CRC:OK)
+[ 12.412s] 0x200 Drive_Status | req= 30.0 rpm  meas= 29.5 rpm  duty=12.0%  mode=DEGRADED  cnt= 5 (CRC:OK)
+[ 12.432s] 0x200 Drive_Status | req= 30.0 rpm  meas= 33.7 rpm  duty=11.5%  mode=DEGRADED  cnt= 6 (CRC:OK)
+[ 12.452s] 0x200 Drive_Status | req= 30.0 rpm  meas= 29.5 rpm  duty=12.0%  mode=DEGRADED  cnt= 7 (CRC:OK)
+[ 12.472s] 0x200 Drive_Status | req= 30.0 rpm  meas= 29.5 rpm  duty=12.0%  mode=DEGRADED  cnt= 8 (CRC:OK)

@@ -1,0 +1,86 @@
+VERSION ""
+
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: ECU PC
+
+
+BO_ 256 Pedal_Cmd: 4 PC
+ SG_ pedal_pct : 0|16@1+ (0.01,0) [0|100] "%" ECU
+ SG_ msg_counter : 16|4@1+ (1,0) [0|15] "" ECU
+ SG_ msg_crc : 24|8@1+ (1,0) [0|255] "" ECU
+
+BO_ 291 ECU_Heartbeat: 5 ECU
+ SG_ hb_counter : 0|32@1+ (1,0) [0|4294967295] "" PC
+ SG_ loopback_flag : 32|8@1+ (1,0) [0|255] "" PC
+
+BO_ 512 Drive_Status: 7 ECU
+ SG_ speed_rpm : 0|16@1+ (0.1,0) [0|300] "rpm" PC
+ SG_ duty_pct : 16|8@1+ (0.5,0) [0|100] "%" PC
+ SG_ mode : 24|4@1+ (1,0) [0|3] "" PC
+ SG_ msg_counter : 28|4@1+ (1,0) [0|15] "" PC
+ SG_ speed_req_rpm : 32|16@1+ (0.1,0) [0|300] "rpm" PC
+ SG_ msg_crc : 48|8@1+ (1,0) [0|255] "" PC
+
+BO_ 513 Diag_Status: 5 ECU
+ SG_ fault_bitmap : 0|16@1+ (1,0) [0|65535] "" PC
+ SG_ rx_err_count : 16|8@1+ (1,0) [0|255] "" PC
+ SG_ msg_counter : 24|4@1+ (1,0) [0|15] "" PC
+ SG_ msg_crc : 32|8@1+ (1,0) [0|255] "" PC
+
+BO_ 528 AEB_Status: 5 ECU
+ SG_ distance_mm : 0|16@1+ (1,0) [0|2000] "mm" PC
+ SG_ aeb_state : 16|4@1+ (1,0) [0|2] "" PC
+ SG_ tof_valid : 20|1@1+ (1,0) [0|1] "" PC
+ SG_ msg_counter : 24|4@1+ (1,0) [0|15] "" PC
+ SG_ msg_crc : 32|8@1+ (1,0) [0|255] "" PC
+
+
+CM_ BO_ 256 "Cyclic pedal command from PC/HIL to ECU (20 ms, E2E protected)";
+CM_ BO_ 291 "Bring-up heartbeat compatible with Lab 17 (500 ms)";
+CM_ BO_ 512 "Cyclic drive control telemetry from ECU (20 ms, E2E protected)";
+CM_ BO_ 513 "Cyclic diagnostic fault status from ECU (100 ms, E2E protected)";
+CM_ BO_ 528 "Cyclic AEB distance and state telemetry from ECU (50 ms, E2E protected)";
+
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 10000;
+BA_DEF_DEF_ "GenMsgCycleTime" 0;
+
+BA_ "GenMsgCycleTime" BO_ 256 20;
+BA_ "GenMsgCycleTime" BO_ 291 500;
+BA_ "GenMsgCycleTime" BO_ 512 20;
+BA_ "GenMsgCycleTime" BO_ 513 100;
+BA_ "GenMsgCycleTime" BO_ 528 50;
+
+VAL_ 512 mode 0 "NORMAL" 1 "DEGRADED" 2 "LIMP" 3 "SAFE_STOP" ;
+VAL_ 528 aeb_state 0 "NORMAL" 1 "WARNING" 2 "BRAKING" ;
