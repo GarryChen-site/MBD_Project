@@ -1,0 +1,12 @@
+# Lessons Learned & Retrospective (`lessons_learned.md`)
+
+## 1. What Worked Exceptionally Well
+- **3-Pass "Walking Skeleton" Strategy:** Completing the entire V-Model pipeline on synthetic data first (Pass 1: Stages 2 → 3 → 4) caught every Simulink API quirk, data-type mismatch, and MEX build issue *before* touching physical hardware. When real hardware logs arrived in Pass 2, `rebuild_from_real_data.m` rebuilt the plant, retuned the controller, ran 19 MIL tests, regenerated C code, and verified 5 SIL scenarios in a single command.
+- **100 % Programmatic Simulink Model Generation:** Building `motor_plant.slx`, `speed_ctrl.slx`, and `ctrl_codegen.slx` via MATLAB scripts (`s2_05_build_plant.m`, `s3_01_build_speed_ctrl.m`, `s4_01_generate_code.m`) eliminated manual clicking errors and binary `.slx` drift.
+- **Reusing Proven Peripheral Bring-Up (`smoketest/`):** Aligning timer channels (`TIM4_CH1 PB6` for PWM, `TIM3 PA6/PA7` for encoder, `ADC1 PA0/PA1` for joystick) and encoder resolution ($N_{\text{rev}} = 1426$) directly with the standalone `smoketest/` projects avoided pin-mapping guesswork.
+
+## 2. Key Technical Pitfalls & How They Were Solved
+- **Discrete Window-Averaging Bias in System ID (`Stage 2`):** An encoder delta count $\Delta N[k]$ over $T_s = 10\text{ ms}$ represents the average shaft speed across the 10 ms window, not an instantaneous sample at $t_k$. Using the exact integral average of the FOPDT exponential in `stage2_lib.m` eliminated a $\approx 5\text{ ms}$ bias on $\hat{\tau}$ and raised the step fit to **95.2 %**.
+- **Fast Mechanical Time Constant vs. 10 ms Sample Period (`Stage 3`):** The real 50:1 N20 gearmotor has $\tau = 27.3\text{ ms}$ (over $4\times$ faster than a 150:1 motor). Enforcing $\lambda \ge 4\,T_s + \tau = 60\text{ ms}$ in `choose_lambda.m` prevented discrete ZOH overshoot while keeping settling time at $0.24\text{ s}$.
+- **Encoder Quantization Floor at Low Count-Per-Rev (`Stage 3 & 6`):** With $N_{\text{rev}} = 1426$ and $T_s = 10\text{ ms}$, $1\text{ count} = 4.21\text{ rpm}$. Recognizing that the measured speed is quantized in $4.21\text{ rpm}$ steps explained the staircase appearance on the hardware speed trace while the underlying continuous shaft speed matched MIL to **96.6 %**.
+- **Pre-Flight Actuator Check in Hardware Loggers (`Stage 2`):** Adding a 0.5 s motor spin + LED blink check at the start of `StepLogger_RunAll()` immediately confirms 6 V battery power before a 3-minute automated sweep begins.
