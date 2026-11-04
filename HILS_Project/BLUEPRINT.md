@@ -1,16 +1,16 @@
 # MBD / HILS Project Blueprint — "Mini Electronic Throttle + AEB ECU"
 
-Goal: build a portfolio project that mirrors the Japanese OEM/Tier1 job description
-(MBD, MBSEによる上流設計, ECU BSW構築, 要求分析, ECU検査) using the hardware in
+Goal: build a bench-scale automotive ECU project demonstrating the complete V-Model development workflow
+(MBD, MBSE-based upstream design, layered ECU BSW, requirements analysis, and HIL-lite ECU verification) using the hardware in
 [`Lab_Hardware/list.md`](../Lab_Hardware/list.md).
 
 ## 1. Feasibility verdict
 
-**Yes — a scaled-down but credible version is feasible.** You cannot replicate real
-AUTOSAR/ISO 26262 tooling (Vector DaVinci, EB tresos, dSPACE), but you CAN demonstrate
-the *process and the thinking*, which is what matters for a junior/no-experience applicant.
+**Yes — a scaled-down, end-to-end engineering prototype is feasible.** While a bench setup does not use commercial
+AUTOSAR/ISO 26262 toolchains (Vector DaVinci, EB tresos, dSPACE), it demonstrates
+the complete *engineering process and quantitative verification methodology* across the V-Model.
 
-| JD keyword | What you can show | Hardware / Tool | Coverage |
+| Domain / Methodology | Implementation Scope | Hardware / Tool | Coverage |
 | :--- | :--- | :--- | :---: |
 | MBD (MATLAB/Simulink) | Plant + controller models, MIL | Simulink, Stateflow | High |
 | V字プロセス | Requirements → design → code → test traceability | Simulink Requirements/Test (or Markdown + pytest) | High |
@@ -94,7 +94,7 @@ flowchart TB
 | 4. Code gen & SIL/PIL | 2 | Generated C, SIL/PIL equivalence report (back-to-back) | PIL vs MIL error within tolerance; stack/exec-time profiled |
 | 5. BSW & CAN | 2 | Layered BSW, DBC, config generator, CAN tx/rx, DTC-lite, watchdog | CANable sees cyclic frames; timeout DTC set/cleared |
 | 6. HIL-lite & ECU test | 2 | Python/MATLAB test scripts, fault injection (sensor open, CAN loss, stuck pedal), test report | All requirements traced to passed tests |
-| 7. Polish | 1 | README, demo video, traceability matrix, Japanese summary (職務経歴書 use) | Reviewer can reproduce in 1 hour |
+| 7. Polish | 1 | README, engineering report, traceability matrix, reproduction guide | Clean-checkout reproduction verified |
 
 ## 5b. Phase 0 checklist (verify before starting)
 
@@ -177,13 +177,13 @@ MBD_HILS_Project/
 - Eclipse Capella: https://github.com/eclipse-capella/capella
 - PlantUML: https://github.com/plantuml/plantuml
 
-## 9. Key talking points for Japanese interviews
+## 9. Key architectural takeaways
 
-- 「V字モデルに沿って、要求→設計→コード生成→PIL→HILライクな検証まで一貫して実施」
-- Back-to-back (MIL/SIL/PIL) equivalence and traceability matrix
-- Conscious limits: AUTOSAR-inspired BSW, not certified; HIL-lite
-- Fault injection & diagnostics (DTC, timeout, plausibility) show ECU検査 mindset
-- Also study: MISRA C, ASPICE basics, ISO 26262 Part 6, AUTOSAR Classic layered architecture, CAN/CAN-FD, UDS (ISO 14229) — these appear in JDs more than tool names.
+- End-to-end V-Model verification: requirements → system architecture → Simulink/Stateflow design → Embedded Coder C99 generation → SIL → closed-loop HIL-lite verification
+- Back-to-back (MIL/SIL/on-target) equivalence and automated bidirectional traceability matrix
+- Explicit engineering boundaries: AUTOSAR-inspired BSW (non-certified) and bench-scale HIL-lite plant
+- Fault injection & diagnostics (DTC bitmap, CAN timeout, dual-channel pedal plausibility) verifying safety goals within FTTI budgets
+- Core automotive standards referenced: MISRA C:2012, ASPICE, ISO 26262 Part 6, AUTOSAR Classic layered architecture, CAN 2.0B, and UDS (ISO 14229)
 
 ## 10. Hardware shopping gaps (cheap)
 

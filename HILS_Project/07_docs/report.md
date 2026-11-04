@@ -264,5 +264,4 @@ Two closed-loop hardware verification datasets were captured on the NUCLEO-F446R
 | [`04_firmware/`](../04_firmware/) | `app_generated/ctrl_codegen.{c,h}`, `app_wrapper.{c,h}`, `closed_loop_runner.{c,h}`, `bsw/com_can_signals.{c,h}`, `bsw/can_telemetry.{c,h}`, `experiments/` |
 | [`05_can/`](../05_can/) | `vehicle.dbc`, `scripts/dbc_codegen.py`, `can_monitor.py` |
 | [`06_test/`](../06_test/) | `hil/trace_check.py`, `reports/stage4/b2b_report.md`, `reports/stage6/*.png` |
-| [`07_docs/`](../07_docs/) | `report.md`, `reproduce.md`, `summary_ja.md`, `interview_notes.md`, `lessons_learned.md` |
-| [`stages/`](../stages/) | `STAGE_0`…`STAGE_7` specs, `STAGE_2_RUNBOOK.md`, `STAGE_3_RUNBOOK.md`, `BRIDGE_GUIDE_physics_to_code_to_hardware.md`, `stage_2_guide/`, `stage_3_guide/` |
+| [`07_docs/`](../07_docs/) | `report.md`, `reproduce.md`, `lessons_learned.md` |

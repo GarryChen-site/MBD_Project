@@ -181,7 +181,7 @@ TRACE_MAP = {
     # 4. CAN communication (UC3)
     "CAN-001": (
         "STM32F446RE `bxCAN1` Bit Timing (`500 kbit/s`, 87.5 % SP)",
-        "`04_firmware/bsw/can_telemetry.h`, `stages/STAGE_5_bsw_can_diag.md`",
+        "`04_firmware/bsw/can_telemetry.h`, `05_can/README.md`",
         "`A5-1`, `INSP` (`BRP=2, TS1=13, TS2=2` at 16 MHz)",
         "PASS",
         "500 kbit/s, 16 tq/bit, sample point 87.5 %",
@@ -223,7 +223,7 @@ TRACE_MAP = {
     ),
     "CAN-007": (
         "`bxCAN1` Automatic Bus-Off Recovery (`ABOM`)",
-        "`04_firmware/bsw/can_telemetry.c`, `stages/STAGE_5_bsw_can_diag.md`",
+        "`04_firmware/bsw/can_telemetry.c`, `05_can/README.md`",
         "`INSP` (`AutoBusOff = ENABLE`)",
         "PASS",
         "Hardware auto-recovery from bus-off per CAN 2.0B specification",

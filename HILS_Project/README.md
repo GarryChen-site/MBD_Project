@@ -232,14 +232,6 @@ MBD_HILS_Project/
 ├── README.md                              # Master project overview & technical introduction
 ├── BLUEPRINT.md                           # High-level project blueprint, V-model mapping & roadmap
 ├── PRODUCT_SPEC.md                        # Master engineering specification, parameter registry & RTE signal contract
-├── stages/                                # Stage 0–7 specifications, runbooks & mathematical guides
-│   ├── README.md                          # Index of all Stage 0–7 documents, runbooks & textbook guides
-│   ├── BRIDGE_GUIDE_physics_to_code_to_hardware.md  # End-to-end physics -> ODE -> Simulink -> C -> STM32 guide
-│   ├── INTERVIEW_GUIDE_mbd_transition.md  # Technical defense & interview preparation guide
-│   ├── STAGE_0_setup_bringup.md ... STAGE_7_release_docs.md
-│   ├── STAGE_2_RUNBOOK.md / STAGE_3_RUNBOOK.md
-│   ├── stage_2_guide/                     # System identification math, MATLAB & Simulink guides
-│   └── stage_3_guide/                     # Control theory, IMC lambda tuning & MIL testing guides
 ├── 01_requirements/                       # Stage 1: Requirements & Safety Engineering
 │   ├── requirements.md                    # 47 EARS-formatted system/software requirements (v1.0)
 │   ├── hara_lite.md                       # ISO 26262-inspired HARA, safety goals (SG-01..04) & FTTI budgets
