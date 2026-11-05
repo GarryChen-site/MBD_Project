@@ -228,10 +228,11 @@ In Stage 6, the generated code runs in closed loop on the physical `NUCLEO-F446R
 ## 5. Repository Structure & Document Map
 
 ```text
-MBD_HILS_Project/
+MBD_Project/
 ├── README.md                              # Master project overview & technical introduction
 ├── BLUEPRINT.md                           # High-level project blueprint, V-model mapping & roadmap
 ├── PRODUCT_SPEC.md                        # Master engineering specification, parameter registry & RTE signal contract
+├── 00_smoketest/                          # Stage 0: Standalone STM32 peripheral bring-up (ADC, TIM, PWM, CAN, I2C, Servo)
 ├── 01_requirements/                       # Stage 1: Requirements & Safety Engineering
 │   ├── requirements.md                    # 47 EARS-formatted system/software requirements (v1.0)
 │   ├── hara_lite.md                       # ISO 26262-inspired HARA, safety goals (SG-01..04) & FTTI budgets
@@ -270,11 +271,16 @@ MBD_HILS_Project/
 │   ├── README.md                          # Verification summary & test inventory
 │   ├── hil/trace_check.py                 # Automated requirement traceability & file-existence verifier
 │   └── reports/                           # SIL B2B report (stage4/b2b_report.md) & HIL overlay plots (stage6/*.png)
-└── 07_docs/                               # Stage 7: Final Engineering Documentation
-    ├── README.md                          # Documentation index
-    ├── report.md                          # Complete quantitative engineering report
-    ├── reproduce.md                       # 5-minute offline & 30-minute hardware clean-checkout reproduction guide
-    └── lessons_learned.md                 # Engineering retrospective
+├── 07_docs/                               # Stage 7: Final Engineering Documentation
+│   ├── README.md                          # Documentation index
+│   ├── report.md                          # Complete quantitative engineering report
+│   ├── reproduce.md                       # 5-minute offline & 30-minute hardware clean-checkout reproduction guide
+│   └── lessons_learned.md                 # Engineering retrospective
+└── 08_results/                            # Real Hardware Execution Logs, Bench Photos & Demo Videos
+    ├── README.md                          # Index of terminal logs, bench photos & videos
+    ├── logs/                              # Raw UART & CANable terminal logs (*_log.txt) from real STM32 runs
+    ├── photos/                            # Physical hardware test-bench & wiring photographs
+    └── videos/                            # Closed-loop motor & fault-injection demonstration videos
 ```
 
 ---

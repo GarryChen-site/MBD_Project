@@ -258,6 +258,7 @@ Two closed-loop hardware verification datasets were captured on the NUCLEO-F446R
 
 | Directory | Contents |
 | :--- | :--- |
+| [`00_smoketest/`](../00_smoketest/) | Standalone STM32 peripheral bring-up (`can/`, `encoder/`, `joystick/`, `motor/`, `servo/`, `i2c/`) |
 | [`01_requirements/`](../01_requirements/) | `requirements.md` (47 EARS reqs), `hara_lite.md`, `traceability.md` (auto-generated), `change_log.md` |
 | [`02_architecture/`](../02_architecture/) | `README.md` (master architecture & pin map), `data_control_hardware_flow.md`, `sandbox_simulation.md` |
 | [`03_simulink/`](../03_simulink/) | `init_params.m`, `plant/motor_plant.slx`, `controller/speed_ctrl.slx`, `controller/ctrl_codegen.slx`, `stage2/`, `stage3/`, `stage4/`, `tests/`, `data/real/*.csv` |
@@ -265,3 +266,4 @@ Two closed-loop hardware verification datasets were captured on the NUCLEO-F446R
 | [`05_can/`](../05_can/) | `vehicle.dbc`, `scripts/dbc_codegen.py`, `can_monitor.py` |
 | [`06_test/`](../06_test/) | `hil/trace_check.py`, `reports/stage4/b2b_report.md`, `reports/stage6/*.png` |
 | [`07_docs/`](../07_docs/) | `report.md`, `reproduce.md`, `lessons_learned.md` |
+| [`08_results/`](../08_results/) | `logs/` (`joystick_motor_calibration_log.txt`, `closed_loop_live_log.txt`, `can_fault_capture_log.txt`), `photos/`, `videos/` |
