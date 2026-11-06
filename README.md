@@ -151,7 +151,7 @@ Stage 3 ([`s3_00_design_pi.m`](03_simulink/stage3/s3_00_design_pi.m), [`s3_01_bu
 
 * **IMC / $\lambda$-Tuning with Discrete ZOH Stability Floor ([`choose_lambda.m`](03_simulink/lib/choose_lambda.m), [`tune_pi_lambda.m`](03_simulink/lib/tune_pi_lambda.m)):**
   Canceling the plant pole $(\tau s + 1)$ with the PI zero shapes the continuous open-loop transfer function to $L(s) = \frac{1}{\lambda s}$ and closed-loop transfer function to $T(s) = \frac{1}{\lambda s + 1}$. Because the real 50:1 motor time constant ($\tau = 27.3\text{ ms}$) is only $2.73\,T_s$, phase lag from the 10 ms zero-order hold and 1-sample feedback delay ($T_{\text{eff}} = 1.5\,T_s = 15\text{ ms}$) causes overshoot if $\lambda$ is chosen too aggressively (`DEF-03`). Enforcing the discrete stability floor:
-  $$\lambda = \max\!\left(3\,T_{\text{eff}},\ 4\,T_s + \tau,\ 0.25\,\tau\right) = 0.0600\text{ s}$$
+ $$\lambda = \max\!\left(\tfrac{6}{\pi}\,T_{\text{eff}},\ 0.5\,\tau,\ 4\,T_{\text{eff}}\right) = \max(28.6,\ 13.7,\ 60)\ \text{ms} = 0.0600\text{ s}$$
   yields the calibrated controller gains:
   $$K_p = \frac{\tau}{K\,(\lambda + t_d)} = 0.14782\text{ \%/rpm}, \qquad K_i = \frac{1}{K\,(\lambda + t_d)} = 5.42184\text{ \%/(rpm}\cdot\text{s)}, \qquad K_b = \frac{1}{\tau} = 36.6786\text{ s}^{-1}$$
 * **Dead-Zone Feedforward & Back-Calculation Anti-Windup ([`build_controller_subsystem.m`](03_simulink/controller/build_controller_subsystem.m)):**
