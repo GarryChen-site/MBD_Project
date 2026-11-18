@@ -1,11 +1,13 @@
 /* closed_loop_runner.h - Pass 2 (Stage 5/6 Core) 10 ms closed-loop hardware runner
  *
- * Pinout aligned 100% with smoketest/joystick, smoketest/encoder, and smoketest/motor:
+ * Pinout aligned 100% with 00_smoketest/{joystick,encoder,motor,i2c,servo}:
  *   - Joystick : PA0 (ADC1_IN0 = VRx), PA1 (ADC1_IN1 = VRy) on hadc1 (84 cycles)
  *   - Encoder  : PA6/PA7 (TIM3_CH1/CH2, TI1&TI2 X4) on htim3 (N_rev = 1426 counts/rev)
  *   - Motor PWM: PB6 (TIM4_CH1, 20 kHz, PSC=0, ARR=799) on htim4
  *   - TB6612   : AIN1 = PC7 (D9), AIN2 = PA9 (D8), STBY = PA8 (D7)
  *   - UART     : PA2/PA3 (USART2, 115200 8N1) on huart2
+ *   - VL53L0X  : PB8 (I2C1_SCL = D15), PB9 (I2C1_SDA = D14) on hi2c1
+ *   - SG90     : PB10 (TIM2_CH3 = D6, 50 Hz, PSC=15, ARR=19999) on htim2
  *
  * Output format (compatible with 04_firmware/experiments/capture_log.py):
  *     #BEGIN hil_closed_loop.csv
@@ -13,6 +15,8 @@
  *     0,2051,2039,0.00,0.00,0.00,0,0,4
  *     ...
  *     #END
+ * AEB Output format (#BEGIN hil_aeb_test.csv):
+ *     t_ms,adcX,adcY,speed_req_rpm,speed_meas_rpm,duty_cmd_pct,fault_bitmap,mode,wcet_us,d_mm,tof_valid,aeb_state,servo_deg
  */
 #ifndef CLOSED_LOOP_RUNNER_H
 #define CLOSED_LOOP_RUNNER_H
@@ -33,5 +37,10 @@ void ClosedLoop_RunLive(uint32_t seconds, const char *file_name);
 /* Run a deterministic 6-second virtual-pedal step test on the real STM32 + real motor
  * (no hand movement required) and stream #BEGIN <file_name> ... #END over UART2. */
 void ClosedLoop_RunAutoStep(const char *file_name);
+
+/* Run multi-rate closed-loop throttle + 50 ms VL53L0X ToF + SG90 Servo AEB
+ * for `seconds` and stream #BEGIN <file_name> ... #END over UART2 (plus CAN 0x100/0x101/0x102).
+ * Enable by defining USE_AEB_HARDWARE (or automatically when HAL_I2C_MODULE_ENABLED is set). */
+void ClosedLoop_RunAEB(uint32_t seconds, const char *file_name);
 
 #endif /* CLOSED_LOOP_RUNNER_H */
