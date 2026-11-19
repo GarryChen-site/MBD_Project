@@ -5,6 +5,8 @@
 [![Target MCU](https://img.shields.io/badge/MCU-STM32F446RE%20(Cortex--M4F)-blue)](04_firmware/)
 [![Toolchain](https://img.shields.io/badge/MATLAB%20%2F%20Simulink-R2026a%20Embedded%20Coder-orange)](03_simulink/)
 
+> **日本語版 README:** [`README_ja.md`](README_ja.md)
+
 ---
 
 ## 1. Executive Overview
