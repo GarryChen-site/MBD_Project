@@ -1,6 +1,8 @@
 # 08 Results & Media — Real Hardware Execution Logs, Bench Photos & Videos
 
-This directory stores the **raw physical bench execution evidence** captured from the **STM32F446RE (`NUCLEO-F446RE`)** + **N20 50:1 DC Gearmotor + Quadrature Hall Encoder** + **KY-023 Dual-Axis Analog Pedal Emulator** + **SN65HVD230 / CANable V2** test bench.
+This directory stores the **physical bench execution evidence** captured from the **STM32F446RE (`NUCLEO-F446RE`)** + **N20 50:1 DC Gearmotor + Quadrature Hall Encoder** + **KY-023 Dual-Axis Analog Pedal Emulator** + **SN65HVD230 / CANable V2** + **SG90 Brake Servo** + **TOF53200 (VL53L0X)** test bench.
+
+All photos and videos have been **stripped of EXIF/camera/location metadata** and encoded in web-standard formats (**JPEG** and **H.264 / AAC MP4** with `yuv420p` + `faststart`) for direct viewing in GitHub's web UI.
 
 > [!TIP]
 > For the MATLAB-generated verification plots (`validation.png`, `plant_validation.png`, `hw_vs_mil_hil_step_test.png`, `hw_vs_mil_hil_closed_loop.png`) and the Stage 4 SIL back-to-back report (`b2b_report.md`), see [`06_test/reports/`](../06_test/reports/) and [`03_simulink/data/real/`](../03_simulink/data/real/).
@@ -11,13 +13,13 @@ This directory stores the **raw physical bench execution evidence** captured fro
 
 ```text
 08_results/
-├── README.md                                      # Index of hardware execution logs, bench photos & videos
+├── README.md                                      # Gallery & index of hardware logs, bench photos & videos
 ├── logs/                                          # Raw terminal transcripts from real STM32 hardware sessions
 │   ├── joystick_motor_calibration_log.txt         # Stage 2: 4 joystick calibration runs + 19 motor static/step sweeps
 │   ├── closed_loop_live_log.txt                   # Stage 6: Closed-loop 6 s auto-step (75 µs WCET) & 15 s live joystick (77 µs WCET)
 │   └── can_fault_capture_log.txt                  # Stage 5/6: Live CANable 500 kbit/s slcan trace + UDS 0x22 fault & WCET readout
-├── photos/                                        # Physical hardware bench & wiring photos
-└── videos/                                        # Closed-loop motor control & fault-injection demonstration videos
+├── photos/                                        # Metadata-stripped hardware bench & wiring photographs (12 files)
+└── videos/                                        # Metadata-stripped H.264 MP4 demonstration videos (5 files)
 ```
 
 ---
@@ -32,6 +34,45 @@ This directory stores the **raw physical bench execution evidence** captured fro
 
 ---
 
-## 3. Bench Photos (`photos/`) & Demo Videos (`videos/`)
+## 3. Demonstration Videos (`videos/`)
 
-Place physical test-bench photographs in [`photos/`](photos/) and closed-loop demonstration recordings in [`videos/`](videos/).
+Click any video link below to play directly in GitHub's web video player (H.264 / AAC, 720p, 30 fps, faststart):
+
+| Video | Stage / Lab | Description |
+| :--- | :---: | :--- |
+| **[`01_smoketest_motor_spin_demo.mp4`](videos/01_smoketest_motor_spin_demo.mp4)** | Stage 0 (`00_smoketest/motor`) | N20 50:1 DC gearmotor + TB6612FNG PWM spin & Hall encoder bring-up |
+| **[`02_smoketest_sg90_servo_sweep_demo.mp4`](videos/02_smoketest_sg90_servo_sweep_demo.mp4)** | Stage 0 (`00_smoketest/servo`) | SG90 micro servo AEB brake actuator sweep verification |
+| **[`03_stage2_motor_calibration_capture.mp4`](videos/03_stage2_motor_calibration_capture.mp4)** | Stage 2 (`s2_01` / `s2_02`) | Automated on-target motor static & step-response sweep logged to CSV via UART |
+| **[`04_stage6_hil_auto_step_test.mp4`](videos/04_stage6_hil_auto_step_test.mp4)** | Stage 6 (`ClosedLoop_RunAutoStep`) | Real-time 100 Hz closed-loop autonomous 60 % step test on STM32F446RE |
+| **[`05_stage6_hil_live_joystick_fault_injection.mp4`](videos/05_stage6_hil_live_joystick_fault_injection.mp4)** | Stage 6 (`ClosedLoop_RunLive`) | Live joystick closed-loop speed control + single-axis `F_PEDAL_PLAUS` fault injection (`30 rpm` limp-home) |
+
+---
+
+## 4. Hardware Bench Photographs (`photos/`)
+
+### Stage 6 — Closed-Loop HIL & CAN Bus Bench
+| Full HIL + CAN System Bench | CANable V2.0 + SN65HVD230 Transceiver | Powered N20 Motor + Hall Encoder |
+| :---: | :---: | :---: |
+| ![Full HIL + CAN Bench](photos/11_hil_full_system_can_bench.jpg) | ![CANable + SN65HVD230](photos/10_can_canable_sn65hvd230_wiring.jpg) | ![N20 Motor + Encoder](photos/12_hil_motor_encoder_wago_closeup.jpg) |
+| [`11_hil_full_system_can_bench.jpg`](photos/11_hil_full_system_can_bench.jpg) | [`10_can_canable_sn65hvd230_wiring.jpg`](photos/10_can_canable_sn65hvd230_wiring.jpg) | [`12_hil_motor_encoder_wago_closeup.jpg`](photos/12_hil_motor_encoder_wago_closeup.jpg) |
+
+| Closed-Loop Bench Wiring |
+| :---: |
+| ![Closed-Loop Bench Wiring](photos/09_hil_closed_loop_bench_wiring.jpg) |
+| [`09_hil_closed_loop_bench_wiring.jpg`](photos/09_hil_closed_loop_bench_wiring.jpg) |
+
+### Stage 0 — Peripheral Bring-Up & Smoke Tests
+| KY-023 Joystick Wiring | KY-023 Manual ADC Test | N20 + TB6612FNG + 6V Battery |
+| :---: | :---: | :---: |
+| ![Joystick Wiring](photos/01_smoketest_joystick_wiring.jpg) | ![Joystick Test](photos/02_smoketest_joystick_test.jpg) | ![Motor TB6612 Wiring](photos/03_smoketest_motor_tb6612_wiring.jpg) |
+| [`01_smoketest_joystick_wiring.jpg`](photos/01_smoketest_joystick_wiring.jpg) | [`02_smoketest_joystick_test.jpg`](photos/02_smoketest_joystick_test.jpg) | [`03_smoketest_motor_tb6612_wiring.jpg`](photos/03_smoketest_motor_tb6612_wiring.jpg) |
+
+| ToF Range Test | ToF I2C Nucleo Wiring | TOF53200 Sensor Close-Up |
+| :---: | :---: | :---: |
+| ![ToF Range Test](photos/04_smoketest_tof_range_test.jpg) | ![ToF Nucleo Wiring](photos/05_smoketest_tof_nucleo_wiring.jpg) | ![TOF53200 Close-Up](photos/06_smoketest_tof53200_sensor_closeup.jpg) |
+| [`04_smoketest_tof_range_test.jpg`](photos/04_smoketest_tof_range_test.jpg) | [`05_smoketest_tof_nucleo_wiring.jpg`](photos/05_smoketest_tof_nucleo_wiring.jpg) | [`06_smoketest_tof53200_sensor_closeup.jpg`](photos/06_smoketest_tof53200_sensor_closeup.jpg) |
+
+| Motor + Encoder Bench | SG90 Brake Servo Wiring |
+| :---: | :---: |
+| ![Motor Encoder Bench](photos/07_smoketest_motor_encoder_bench.jpg) | ![SG90 Servo Wiring](photos/08_smoketest_sg90_servo_wiring.jpg) |
+| [`07_smoketest_motor_encoder_bench.jpg`](photos/07_smoketest_motor_encoder_bench.jpg) | [`08_smoketest_sg90_servo_wiring.jpg`](photos/08_smoketest_sg90_servo_wiring.jpg) |
